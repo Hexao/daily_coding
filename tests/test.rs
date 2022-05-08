@@ -7,6 +7,15 @@ mod easy {
         assert!(p001::solve(&[1, 3, 4, 0, 8, 9, 6, 7, 2, 5], 7));
         assert!(!p001::solve(&[1; 250], 14));
     }
+
+    #[test]
+    fn p008() {
+        let root = daily_coding::root![1, 0, [[1, 1, 1], 0, 0]];
+        assert_eq!(p008::count_unival_subtree(&root), 5);
+
+        let root = daily_coding::root![[0, 1, 0], 2, [1, 0, 1]];
+        assert_eq!(p008::count_unival_subtree(&root), 4);
+    }
 }
 
 mod medium {
