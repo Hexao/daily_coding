@@ -93,4 +93,13 @@ mod hard {
 
         println!("End func");
     }
+
+    #[test]
+    fn p009() {
+        assert_eq!(p009::solve(&[2, 4, 6, 2, 5]), 13);
+        assert_eq!(p009::solve(&[5, 1, 1, 5]), 10);
+
+        assert_eq!(p009::solve(&[4, 1, -4, 1, 4, 4]), 9);
+        assert_eq!(p009::solve(&[-2, -1, 0, 1, 5, 4, 10]), 15);
+    }
 }
