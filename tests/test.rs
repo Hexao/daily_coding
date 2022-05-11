@@ -59,6 +59,19 @@ mod medium {
         assert_eq!(*arc.read().unwrap(), TARGET);
         assert!(start.elapsed().as_millis() >= SLEEP as u128);
     }
+
+    #[test]
+    fn p011() {
+        const DICO: &[&str] = &[
+            "chien", "chevre", "chat", "lapin", "cheval"
+        ];
+
+        let ch = p011::find_in(DICO, "ch");
+        assert_eq!(ch, vec!["chien", "chevre", "chat", "cheval"]);
+
+        let ch = p011::find_in(DICO, "che");
+        assert_eq!(ch, vec!["chevre", "cheval"]);
+    }
 }
 
 mod hard {
