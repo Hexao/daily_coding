@@ -39,6 +39,26 @@ mod medium {
         assert_eq!(p007::solve("1101"), 1);
         assert_eq!(p007::solve("2151410152118"), 60); // bonjour ?
     }
+
+    #[test]
+    fn p010() {
+        use std::sync::{Arc, RwLock};
+        const SLEEP: u64 = 1_000;
+        const TARGET: i32 = 10;
+
+        let arc = Arc::new(RwLock::new(0));
+        let clone = arc.clone();
+
+        let start = std::time::Instant::now();
+
+        p010::call_after(move || {
+            let mut val = clone.write().unwrap();
+            *val = TARGET;
+        }, SLEEP);
+
+        assert_eq!(*arc.read().unwrap(), TARGET);
+        assert!(start.elapsed().as_millis() >= SLEEP as u128);
+    }
 }
 
 mod hard {
