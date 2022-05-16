@@ -37,13 +37,14 @@ mod medium {
         assert_eq!(p007::solve("1111"), 5);
         assert_eq!(p007::solve("0111"), 0);
         assert_eq!(p007::solve("1101"), 1);
+        assert_eq!(p007::solve("1110"), 2);
         assert_eq!(p007::solve("2151410152118"), 60); // bonjour ?
     }
 
     #[test]
     fn p010() {
         use std::sync::{Arc, RwLock};
-        const SLEEP: u64 = 1_000;
+        const SLEEP: u64 = 250;
         const TARGET: i32 = 10;
 
         let arc = Arc::new(RwLock::new(0));
@@ -56,21 +57,26 @@ mod medium {
             *val = TARGET;
         }, SLEEP);
 
-        assert_eq!(*arc.read().unwrap(), TARGET);
         assert!(start.elapsed().as_millis() >= SLEEP as u128);
+        assert_eq!(*arc.read().unwrap(), TARGET);
     }
 
     #[test]
     fn p011() {
-        const DICO: &[&str] = &[
-            "chien", "chevre", "chat", "lapin", "cheval"
-        ];
+        const DICO: &[&str] = &["chien", "chevre", "chat", "lapin", "cheval"];
 
         let ch = p011::find_in(DICO, "ch");
-        assert_eq!(ch, vec!["chien", "chevre", "chat", "cheval"]);
+        assert_eq!(ch, &["chien", "chevre", "chat", "cheval"]);
 
         let ch = p011::find_in(DICO, "che");
-        assert_eq!(ch, vec!["chevre", "cheval"]);
+        assert_eq!(ch, &["chevre", "cheval"]);
+    }
+
+    #[test]
+    fn p014() {
+        let pi = p014::compute_pi();
+        println!("{pi}");
+        assert!((3.14159 - pi).abs() < 0.00001);
     }
 }
 
@@ -81,12 +87,12 @@ mod hard {
     fn p002() {
         assert_eq!(
             p002::solve(&[1, 2, 3, 4, 5]),
-            vec![120, 60, 40, 30, 24]
+            &[120, 60, 40, 30, 24]
         );
 
         assert_eq!(
             p002::solve(&[4, 2, 8, 2, 4]),
-            vec![128, 256, 64, 256, 128]
+            &[128, 256, 64, 256, 128]
         );
     }
 
