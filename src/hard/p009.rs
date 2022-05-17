@@ -13,7 +13,7 @@ pub fn solve(data: &[i32]) -> usize {
     let mut i = 0;
 
     while i < len {
-        let a = *data.get(i + 0).unwrap();
+        let a = *data.get(i).unwrap();
         if a < 1 {
             i += 1;
             continue;
@@ -48,14 +48,12 @@ pub fn solve(data: &[i32]) -> usize {
             }
 
             i += 4;
+        } else if b + d > a + c {
+            sum += b as usize;
+            i += 3;
         } else {
-            if b + d > a + c {
-                sum += b as usize;
-                i += 3;
-            } else {
-                sum += a as usize;
-                i += 2;
-            }
+            sum += a as usize;
+            i += 2;
         }
     }
 

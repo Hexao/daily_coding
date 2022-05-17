@@ -10,6 +10,5 @@
 pub fn find_in<'word>(dico: &[&'word str], mask: &str) -> Vec<&'word str> {
     dico.iter()
         .filter(|word| word.starts_with(mask))
-        .map(|word| *word)
-        .collect()
+        .copied().collect()
 }

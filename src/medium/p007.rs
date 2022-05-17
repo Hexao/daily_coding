@@ -6,7 +6,7 @@
 pub fn solve(data: &str) -> usize {
     let bytes = data.as_bytes();
 
-    if bytes.iter().any(|&b| b < b'0' || b > b'9') {
+    if bytes.iter().any(|b| !(b'0'..=b'9').contains(b)) {
         return 0;
     }
 

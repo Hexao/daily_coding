@@ -55,13 +55,17 @@ fn solve(staircase_len: u32, set: &[u32], dist: u32, mut log: Vec<u32>) -> (usiz
         let dist = dist + i;
         log.push(*i);
 
-        if staircase_len > dist {
-            let (inner, ret) = solve(staircase_len, set, dist, log);
-            count += inner;
-            log = ret;
-        } else if staircase_len == dist {
-            println!("{log:?}");
-            count += 1;
+        match staircase_len.cmp(&dist) {
+            std::cmp::Ordering::Greater => {
+                let (inner, ret) = solve(staircase_len, set, dist, log);
+                count += inner;
+                log = ret;
+            }
+            std::cmp::Ordering::Equal => {
+                println!("{log:?}");
+                count += 1;
+            }
+            std::cmp::Ordering::Less => {}
         }
 
         log.pop();

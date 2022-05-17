@@ -24,7 +24,7 @@ pub fn solve(mut data: Vec<i32>) -> i32 {
 }
 
 /// Sort the `data` vector and places all negativ numbers at the end.
-fn sort_pos_neg(data: &mut Vec<i32>) -> usize {
+fn sort_pos_neg(data: &mut [i32]) -> usize {
     let mut i = data.len();
     if i == 0 { return 0; }
 
@@ -34,9 +34,7 @@ fn sort_pos_neg(data: &mut Vec<i32>) -> usize {
         i -= 1;
 
         if data[i] <= 0 {
-            let tmp = data[i];
-            data[i] = data[j];
-            data[j] = tmp;
+            data.swap(i, j);
             j -= 1;
         }
 
