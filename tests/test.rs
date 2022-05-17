@@ -141,4 +141,15 @@ mod hard {
         assert_eq!(p009::solve(&[4, 1, -4, 1, 4, 4]), 9);
         assert_eq!(p009::solve(&[-2, -1, 0, 1, 5, 4, 10]), 15);
     }
+
+    #[test]
+    fn p012() {
+        assert_eq!(p012::solve_basic(4), 5);
+
+        println!();
+        assert_eq!(p012::solve_basic(5), 8);
+
+        println!();
+        assert_eq!(p012::solve_extended(10, &[1, 3, 5]), 47);
+    }
 }
