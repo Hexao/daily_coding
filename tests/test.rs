@@ -152,4 +152,11 @@ mod hard {
         println!();
         assert_eq!(p012::solve_extended(10, &[1, 3, 5]), 47);
     }
+
+    #[test]
+    fn p013() {
+        assert_eq!(p013::solve("abcba", 2), "bcb");
+        assert_eq!(p013::solve("123456789", 1), "1");
+        assert_eq!(p013::solve("barbapapa", 2), "apapa");
+    }
 }
