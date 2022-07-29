@@ -16,6 +16,31 @@ mod easy {
         let root = daily_coding::root![[0, 1, 0], 2, [1, 0, 1]];
         assert_eq!(p008::count_unival_subtree(&root), 4);
     }
+
+    #[test]
+    fn p016() {
+        use p016::Order;
+
+        let mut order = Order::<3>::default();
+        assert_eq!(order.get_last(0), None);
+
+        order.record(10);
+        assert_eq!(order.get_last(0), Some(10));
+        assert_eq!(order.get_last(1), None);
+
+        order.record(11);
+        assert_eq!(order.get_last(0), Some(11));
+        assert_eq!(order.get_last(1), Some(10));
+        assert_eq!(order.get_last(2), None);
+
+        for i in 12..20 {
+            order.record(i);
+            assert_eq!(order.get_last(0), Some(i));
+            assert_eq!(order.get_last(1), Some(i - 1));
+            assert_eq!(order.get_last(2), Some(i - 2));
+            assert_eq!(order.get_last(3), None);
+        }
+    }
 }
 
 mod medium {
@@ -76,7 +101,29 @@ mod medium {
     fn p014() {
         let pi = p014::compute_pi();
         println!("{pi}");
-        assert!((3.14159 - pi).abs() < 0.00001);
+        assert!((std::f64::consts::PI - pi).abs() < 0.00001);
+    }
+
+    #[test]
+    fn p015() {
+        const POOL: usize = 100_000;
+
+        let data = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+        let mut dist = [0; 10];
+
+        for _ in 0..POOL {
+            dist[p015::pick_random(&data) as usize] += 1;
+        }
+
+        let var: Vec<_> = dist.iter().map(|el| {
+            (el - (POOL  / 10) as i32).abs() as f32 / (POOL / 10) as f32
+        }).collect();
+
+        println!("{dist:5?}");
+        println!("{var:.3?}");
+        println!("{:.3?}", var.iter().fold(0.0, |f, &el| if el > f { el } else { f }));
+
+        assert!(var.iter().all(|&el| el < 0.05));
     }
 }
 
@@ -158,5 +205,11 @@ mod hard {
         assert_eq!(p013::solve("abcba", 2), "bcb");
         assert_eq!(p013::solve("123456789", 1), "1");
         assert_eq!(p013::solve("barbapapa", 2), "apapa");
+    }
+
+    #[test]
+    fn p017() {
+        assert_eq!(p017::solve("root\n\tfolder\n\t\tfile.txt"), 20);
+        assert_eq!(p017::solve("dir\n\tsubdir1\n\t\tfile1.ext\n\t\tsubsubdir1\n\tsubdir2\n\t\tsubsubdir2\n\t\t\tfile2.ext"), 32);
     }
 }
